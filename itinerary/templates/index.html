@@ -1,0 +1,355 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Itinerary Generator</title>
+</head>
+<body>
+    <h1>Travel Itinerary Generator</h1>
+    <form id="itinerary-form" method="post" action="{% url 'generate_itinerary' %}">
+        {% csrf_token %}
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required>
+
+        <label for="days">Number of Days:</label>
+        <input type="number" id="days" name="days" value="3" required>
+
+        <label for="activity_type">Activity Type (e.g., adventure, relaxation):</label>
+        <input type="text" id="activity_type" name="activity_type" value="general">
+
+        <button type="submit">Generate Itinerary</button>
+    </form>
+
+    {% if itinerary %}
+    <h2>Generated Itinerary for {{ city }}</h2>
+    <pre>{{ itinerary }}</pre>
+    {% endif %}
+</body>
+</html> {% endcomment %}
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Travel Itinerary Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            color: #2c3e50;
+        }
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        pre {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1>Luxury Travel Itinerary Planner</h1>
+    <form id="itinerary-form" method="post" action="{% url 'generate_itinerary' %}">
+        {% csrf_token %}
+        <label for="city">Destination City:</label>
+        <input type="text" id="city" name="city" required placeholder="e.g., Paris, Tokyo, New York">
+        
+        <label for="days">Duration of Stay (days):</label>
+        <input type="number" id="days" name="days" value="3" required min="1" max="30">
+        
+        <label for="activity_type">Preferred Experience:</label>
+        <input type="text" id="activity_type" name="activity_type" value="general" placeholder="e.g., adventure, relaxation, cultural">
+        
+        <button type="submit">Create Your Bespoke Itinerary</button>
+    </form>
+    
+    {% if itinerary %}
+    <h2>Your Personalized Itinerary for {{ city }}</h2>
+    <pre>{{ itinerary }}</pre>
+    {% endif %}
+</body>
+</html> {% endcomment %}
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Travel Itinerary Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Your existing styles */
+        body {
+            font-family: 'Raleway', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+        /* Additional styling for error messages */
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Luxury Travel Itinerary Planner</h1>
+    <form id="itinerary-form" method="post" action="{% url 'generate_itinerary' %}">
+        {% csrf_token %}
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+        <label for="city">Destination City:</label>
+        <input type="text" id="city" name="city" required placeholder="e.g., Paris, Tokyo, New York">
+        
+        <label for="days">Duration of Stay (days):</label>
+        <input type="number" id="days" name="days" value="3" required min="1" max="30">
+        
+        <label for="activity_type">Preferred Experience:</label>
+        <input type="text" id="activity_type" name="activity_type" value="general" placeholder="e.g., adventure, relaxation, cultural">
+        
+        <button type="submit">Create Your Bespoke Itinerary</button>
+    </form>
+    
+    {% if itinerary %}
+    <div class="itinerary">
+        <h2>Your Personalized Itinerary for {{ city }}</h2>
+        {% for day in itinerary %}
+            <div class="day">
+                <h3>Day {{ forloop.counter }}</h3>
+                {% for activity in day.activities %}
+                    <div class="activity">
+                        <span class="activity-time">{{ activity.time }}:</span>
+                        <span class="activity-description">{{ activity.description }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+</html> {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Travel Itinerary Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a2a3a;
+            --secondary-color: #c9a77c;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --card-bg-color: #ffffff;
+        }
+        body {
+            font-family: 'Raleway', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+        }
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 20px;
+        }
+        form {
+            background-color: var(--card-bg-color);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #b08e6b;
+        }
+        .error {
+            color: #d32f2f;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #ffcdd2;
+            border-radius: 4px;
+        }
+        .itinerary {
+            background-color: var(--card-bg-color);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .day {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .day:last-child {
+            border-bottom: none;
+        }
+        .day h3 {
+            color: var(--secondary-color);
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        .activity {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: baseline;
+        }
+        .activity-time {
+            font-weight: 600;
+            color: var(--primary-color);
+            min-width: 80px;
+            margin-right: 10px;
+        }
+        .activity-description {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Luxury Travel Itinerary Planner</h1>
+        <form id="itinerary-form" method="post" action="{% url 'generate_itinerary' %}">
+            {% csrf_token %}
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+            <label for="city">Destination City:</label>
+            <input type="text" id="city" name="city" required placeholder="e.g., Paris, Tokyo, New York">
+            
+            <label for="days">Duration of Stay (days):</label>
+            <input type="number" id="days" name="days" value="3" required min="1" max="30">
+            
+            <label for="activity_type">Preferred Experience:</label>
+            <input type="text" id="activity_type" name="activity_type" value="general" placeholder="e.g., adventure, relaxation, cultural">
+            
+            <button type="submit">Create Your Bespoke Itinerary</button>
+        </form>
+        
+        {% if itinerary %}
+        <div class="itinerary">
+            <h2>Your Personalized Itinerary for {{ city }}</h2>
+            {% for day in itinerary %}
+                <div class="day">
+                    <h3>Day {{ forloop.counter }}</h3>
+                    {% for activity in day.activities %}
+                        <div class="activity">
+                            {% if activity.time %}
+                                <span class="activity-time">{{ activity.time }}</span>
+                            {% endif %}
+                            <span class="activity-description">{{ activity.description }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
